@@ -1,6 +1,4 @@
 
-*(Folder names may vary depending on challenges added)*
-
 ---
 
 ## 🚀 How to Run / Use This Project
