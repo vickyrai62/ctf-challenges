@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ challenge.title }} - AIT CTF</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>AIT CTF - {{ challenge.title }}</h1>
+        <nav>
+            <a href="{{ url_for('challenges') }}">Challenges</a>
+            <a href="{{ url_for('scoreboard') }}">Scoreboard</a>
+            {% if session.role == 'admin' %}
+                <a href="{{ url_for('admin') }}">Admin</a>
+            {% endif %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="challenge-section">
+            <h2>{{ challenge.title }}</h2>
+            <p class="category">Category: {{ challenge.category }}</p>
+            {% if challenge.category == 'cryptography' and challenge.crypto_type %}
+                <p class="crypto-type">Type: {{ challenge.crypto_type.title() }}</p>
+            {% endif %}
+            <p class="points">Points: {{ challenge.points }}</p>
+            <div class="description">
+                <p>{{ challenge.description }}</p>
+            </div>
+            {% if challenge.get_media_files() %}
+            <div class="media-files">
+                <h3>Attached Files:</h3>
+                <div class="image-gallery">
+                    {% for filename in challenge.get_media_files() %}
+                    <div class="image-item">
+                        <img src="{{ url_for('static', filename='uploads/challenges/' + filename) }}" alt="{{ filename }}" onclick="openModal('{{ url_for('static', filename='uploads/challenges/' + filename) }}')">
+                        <p>{{ filename }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for message in messages %}
+                            <p class="flash">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <form method="POST" class="flag-form">
+                <div class="form-group">
+                    <label for="flag">Submit Flag:</label>
+                    <input type="text" id="flag" name="flag" placeholder="AITCTF{flag_here}" required>
+                </div>
+                <button type="submit">Submit Flag</button>
+            </form>
+            <a href="{{ url_for('challenges') }}" class="btn back-btn">Back to Challenges</a>
+        </section>
+    </main>
+
+    <!-- Modal for full-size image -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <footer>
+        <p>&copy; 2025 AIT CTF. All rights reserved.</p>
+    </footer>
+    <script>
+        function openModal(src) {
+            document.getElementById('imageModal').style.display = 'block';
+            document.getElementById('modalImage').src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

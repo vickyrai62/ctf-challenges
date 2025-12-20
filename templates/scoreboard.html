@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard - AIT CTF</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>AIT CTF - Scoreboard</h1>
+        <nav>
+            <a href="{{ url_for('challenges') }}">Challenges</a>
+            <a href="{{ url_for('scoreboard') }}">Scoreboard</a>
+            {% if session.role == 'admin' %}
+                <a href="{{ url_for('admin') }}">Admin</a>
+            {% endif %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="scoreboard-section">
+            <h2>Leaderboard</h2>
+            <table class="scoreboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Username</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.rank }}</td>
+                            <td>{{ user.user.username }}</td>
+                            <td>{{ user.user.score }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AIT CTF. All rights reserved.</p>
+    </footer>
+</body>
+</html>

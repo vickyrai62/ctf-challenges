@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIT CTF - Capture The Flag</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>AIT CTF - Capture The Flag</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Welcome to AIT CTF</h2>
+            <p>Test your cybersecurity skills by solving challenges and capturing flags!</p>
+        </section>
+
+        <section class="rules">
+            <h3>Rules</h3>
+            <ul>
+                <li>Register an account to participate</li>
+                <li>Solve challenges by finding and submitting the correct flags</li>
+                <li>Flags are in the format: AITCTF{flag_here}</li>
+                <li>Each challenge has different point values</li>
+                <li>Check the scoreboard to see your ranking</li>
+                <li>No cheating or sharing flags</li>
+            </ul>
+        </section>
+
+        <section class="challenge-types">
+            <h3>Challenge Types</h3>
+            <div class="types-grid">
+                <div class="type">Audio</div>
+                <div class="type">Car</div>
+                <div class="type">Hashing</div>
+                <div class="type">House of Secrets</div>
+                <div class="type">Images</div>
+                <div class="type">Location</div>
+                <div class="type">Login</div>
+                <div class="type">Logo</div>
+                <div class="type">Message Encoding/Decoding</div>
+                <div class="type">Morse Code</div>
+                <div class="type">QR Code</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AIT CTF. All rights reserved.</p>
+    </footer>
+</body>
+</html>
